@@ -92,17 +92,23 @@
 <section class="section_all section_page_new">
     <div class="container">
         <div class="title_all text-center">
-            <h1 class="text-title after-title">THÔNG TIN KHÁCH HÀNG</h1>
+            <h1 class="text-title after-title">THÔNG TIN ĐOÀN VIÊN</h1>
         </div>
         <div class="row mb-lg-4 mb-3">
             <div class="col-md-2">
             </div>
             <div class="col-md-8">
-                <form th:action="@{/users/register}" th:object="${user}" method="POST" class="form-connect-main">
+                <form th:action="@{/user/register}" th:object="${user}" method="POST" class="form-connect-main">
                 	<h3 class="fs-20 text-uppercase main_color pb-lg-3">THÔNG TIN</h3>
                 	<div class="row">
 	                	<div class="col-md-6 mb-4">
 	                		<input type="text" name="name" class="form-control input-form" placeholder="Họ và tên">
+	                	</div>
+	                	<div class="col-md-6 mb-4">
+	                		<input type="text" name="username" class="form-control input-form" placeholder="Tên đăng nhập">
+	                	</div>
+	                	<div class="col-md-6 mb-4">
+	                		<input type="password" name="password" class="form-control input-form" placeholder="Mật khẩu">
 	                	</div>
 	                	<div class="col-md-6 mb-4">
 	                		<input type="text" name="phone" class="form-control input-form" placeholder="Số điện thoại">

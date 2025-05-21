@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đồng hồ THL Watches - Danh sách User</title>
+    <title>Đồng hồ THL Watches</title>
 
     <link rel="stylesheet" th:href="@{/assets/frontend/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/assets/frontend/css/font-awesome.min.css}">
     <link rel="stylesheet" th:href="@{/assets/frontend/css/swiper-bundle.min.css}">
     <link rel="stylesheet" th:href="@{/assets/frontend/css/jquery.fancybox.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/frontend/datetimepicker/jquery.datetimepicker.css}">
     <link rel="stylesheet" th:href="@{/assets/frontend/css/reset.css}">
     <link rel="stylesheet" th:href="@{/assets/frontend/scss/style.css}">
     <link rel="stylesheet" th:href="@{/assets/frontend/scss/style-mobile.css}">
@@ -92,36 +93,61 @@
 <section class="section_all section_page_new">
     <div class="container">
         <div class="title_all text-center">
-            <h1 class="text-title after-title">DANH SÁCH KHÁCH HÀNG</h1>
+            <h1 class="text-title after-title">THÔNG TIN ĐOÀN VIÊN</h1>
         </div>
         <div class="row mb-lg-4 mb-3">
-            <div class="col-md-1">
+            <div class="col-md-2">
             </div>
-            <div class="col-md-10">
-                <form th:action="@{/users/update}" method="POST" class="form-connect-main" >
-                	<table class="table table-striped">
-                		<thead>
-						    <tr>
-						      <th scope="col">#</th>
-						      <th scope="col">HỌ TÊN</th>
-						      <th scope="col">SĐT</th>
-						      <th scope="col">EMAIL</th>
-						      <th scope="col">ĐỊA CHỈ</th>
-						    </tr>
-						  </thead>
-						  <tbody>
-						    <tr th:each="user : ${users}">
-						      <th scope="row">1</th>
-						      <td><span th:text="${user.name}"></span></td>
-						      <td><span th:text="${user.phone}"></span></td>
-						      <td><span th:text="${user.email}"></span></td>
-						      <td><span th:text="${user.address}"></span></td>
-						    </tr>
-						  </tbody>
-                	</table>
+            <div class="col-md-8">
+                <form th:action="@{/member/insert}" th:object="${member}" method="POST" class="form-connect-main">
+                	<h3 class="fs-20 text-uppercase main_color pb-lg-3">THÔNG TIN</h3>
+                	<div class="row">
+	                	<div class="col-md-6 mb-4">
+	                		<input type="text" name="name" class="form-control input-form" th:field="*{name}" placeholder="Họ và tên">
+	                		<p class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+	                	</div>
+	                	<div class="col-md-6 mb-4">
+	                		<input type="text" name="birthday" class="form-control input-form datepicker" placeholder="Ngày sinh">
+	                	</div>
+	                	<div class="col-md-6 mb-4 d-flex align-items-center">
+	                		<div class="title-gender mr-4">Giới tính: </div>
+	                		<div class="form-check mr-3">
+							  <input class="form-check-input" type="radio" name="gender" id="radioDefault1" checked="checked" value="0">
+							  <label class="form-check-label" for="radioDefault1">Nam</label>
+							</div>
+							<div class="form-check">
+							  <input class="form-check-input" type="radio" name="gender" id="radioDefault1" value="1">
+							  <label class="form-check-label" for="radioDefault1">Nữ</label>
+							</div>
+	                	</div>
+	                	<div class="col-md-6 mb-4">
+	                		<input type="text" name="cccd" class="form-control input-form" th:field="*{cccd}" placeholder="Số căn cước công dân">
+	                		<p class="text-danger" th:if="${#fields.hasErrors('cccd')}" th:errors="*{cccd}"></p>
+	                	</div>
+	                	<div class="col-md-6 mb-4">
+	                		<input type="text" name="phone" th:field="*{phone}" class="form-control input-form" pattern="[0-9]{10}" required placeholder="Số điện thoại">
+	                		<p class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
+	                	</div>
+	                	<div class="col-md-6 mb-4">
+	                		<input type="email" name="email" th:field="*{email}" id="email" class="form-control input-form" pattern=".+@gmail\eaut.edu\.com\.vn" size="30" required placeholder="Email">
+	                		<p class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+	                	</div>
+	                	<div class="col-md-6 mb-4">
+	                		<input type="text" name="address" class="form-control input-form" placeholder="Địa chỉ">
+	                	</div>
+	                	<div class="col-md-6 mb-4">
+	                		<input type="text" name="position" class="form-control input-form" placeholder="Chức vụ">
+	                	</div>
+	                	<div class="col-lg-12 mb-4">
+	                		<textarea rows="4" cols="20" placeholder="Nội dung" name="content" class="form-control input-form input-content-form"></textarea>
+	                	</div>
+	                	<div class="col-lg-12 mb-4 d-flex justify-content-center">
+	                		<button type="submit" class="btn-submit-form smooth">Thêm mới</button>
+	                	</div>
+	                </div>
                 </form>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2">
             </div>
         </div>
         
@@ -180,6 +206,7 @@
 <script defer th:src="@{/assets/frontend/js/bootstrap.min.js}"></script>
 <script defer th:src="@{/assets/frontend/js/swiper-bundle.min.js}"></script>
 <script defer th:src="@{/assets/frontend/js/jquery.fancybox.min.js}"></script>
+<script defer th:src="@{/assets/frontend/datetimepicker/jquery.datetimepicker.js}"></script>
 <script defer th:src="@{/assets/frontend/js/script-slide.js}"></script>
 <script defer th:src="@{/assets/frontend/js/script.js}"></script>
 </body>

@@ -43,5 +43,23 @@ var PROGRAM = (function() {
 })();
 
 window.onload = function() {
-    PROGRAM._();
+    // PROGRAM._();
+	
+	$('.datepicker').datetimepicker({
+        lang:'vi',
+        timepicker:false,
+        // formatTime: 'H:i',
+        format:'d-m-Y',
+        onClose: function(e,e1){
+          try{
+            var val = $(e1).val();
+            var s= val.split(' ');
+            var s1 = s[0].split('-');
+            var s2 = s[1].split(':');
+            var d = new Date(s1[2],s1[1]-1,s1[0],s2[0],s2[1],s2[2]);
+            $(e1).next().val(d.getTime()/1000);
+          }
+          catch(ex){}
+        }
+      });
 };
